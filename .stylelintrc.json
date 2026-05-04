@@ -1,0 +1,22 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "plugins": ["stylelint-scss"],
+  "rules": {
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      {
+        "message": "BEM selector expected: block__element--modifier"
+      }
+    ],
+    "color-named": "never",
+    "declaration-block-no-duplicate-properties": true,
+    "no-descending-specificity": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/no-global-function-names": null,
+    "import-notation": null,
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "media-feature-range-notation": null,
+    "declaration-property-value-no-unknown": null
+  }
+}

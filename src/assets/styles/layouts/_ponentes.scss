@@ -1,0 +1,125 @@
+﻿@use "../variables" as vars;
+@use "../mixins" as mix;
+
+// ─── Category colors (same oklch values as in _libre.scss) ───────────────────
+.ponentes-page {
+  --cat-ceramica: oklch(38% 0.12 50deg);
+  --cat-textil:   oklch(33% 0.14 280deg);
+  --cat-madera:   oklch(28% 0.1  80deg);
+  --cat-joyeria:  oklch(38% 0.1  220deg);
+  --cat-vidrio:   oklch(38% 0.12 170deg);
+  --cat-papel:    oklch(33% 0.1  30deg);
+}
+
+// â”€â”€â”€ Cascade layers declaration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+@layer bootstrap, base, components, utilities;
+
+@layer base {
+  .page-hero {
+    padding: 4rem 0;
+    text-align: center;
+    background-color: vars.$color-dark;
+
+    &--ponentes {
+      background: linear-gradient(
+        135deg,
+        vars.$color-dark 0%,
+        mix.shade(vars.$color-primary, 30%) 100%
+      );
+    }
+
+    &__overline {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: vars.$color-accent;
+      margin-bottom: 0.75rem;
+    }
+
+    &__title {
+      font-family: vars.$font-family-serif;
+      font-size: mix.fluid-size(2, 3.5);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    &__lead {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: mix.tint(vars.$color-light, 20%);
+      line-height: 1.7;
+    }
+  }
+}
+
+@layer components {
+  // â”€â”€ Speakers section container â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .speakers {
+    padding: 4rem 0;
+    container-type: inline-size;
+    container-name: speakers-section;
+
+    // Flexbox grid (no Bootstrap .row / .col-*)
+    &__grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    &__item {
+      flex: 0 1 calc(33.333% - 1rem);
+      min-width: 240px;
+      container-type: inline-size;
+      container-name: speaker-item;
+    }
+
+    // Responsive flex breakpoints
+    @media (max-width: vars.$mq-lg) {
+      &__item {
+        flex: 0 1 calc(50% - 0.75rem);
+      }
+    }
+
+    @media (max-width: vars.$mq-sm) {
+      &__item {
+        flex: 1 1 100%;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  // Container query on the speakers section
+  @container speakers-section (max-width: 500px) {
+    .speakers__item {
+      flex: 1 1 100%;
+    }
+  }
+
+  // Visually hidden utility
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+// ─── Speaker badge category colors ───────────────────────────────────────────
+.speaker-card__badge {
+  .badge--ceramica { background-color: var(--cat-ceramica); color: #fff; }
+  .badge--textil   { background-color: var(--cat-textil);   color: #fff; }
+  .badge--madera   { background-color: var(--cat-madera);   color: #fff; }
+  .badge--joyeria  { background-color: var(--cat-joyeria);  color: #fff; }
+  .badge--vidrio   { background-color: var(--cat-vidrio);   color: #fff; }
+  .badge--papel    { background-color: var(--cat-papel);    color: #fff; }
+}

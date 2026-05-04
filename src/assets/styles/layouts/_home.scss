@@ -1,60 +1,372 @@
-@use "../variables";
+@use "../variables" as vars;
+@use "../mixins" as mix;
 
-* {
+// ─── Page shell ──────────────────────────────────────────────────────────────
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
+  font-family: vars.$font-family-sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: vars.$color-light;
+  color: vars.$color-dark;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  margin: 0;
-  padding: 2rem;
-  font-family: variables.$font-family-sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  background-color: variables.$uoc-bg;
-  color: variables.$uoc-corporate;
+  min-height: 100vh;
 }
 
-.uoc-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-  border-radius: 2rem;
-  text-align: center;
-  background-color: #fff;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+main {
+  flex: 1;
 }
 
-.uoc-logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.5rem;
-  max-width: 200px;
+img {
+  max-width: 100%;
   height: auto;
-
-  @media (min-width: variables.$mqMinWidth) {
-    max-width: none;
-  }
 }
 
-.uoc-title {
-  font-family: variables.$font-family-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: variables.$uoc-corporate;
-
-  @media (min-width: variables.$mqMinWidth) {
-    font-size: 36px;
-  }
+// ─── Poster wrapper ───────────────────────────────────────────────────────────
+.poster-wrapper {
+  // Container query context kept for future use
+  container-type: inline-size;
+  container-name: poster-wrap;
 }
 
-.uoc-footer {
-  margin-top: 1.5rem;
-  font-size: 0.75rem;
-  text-align: center;
+// ─── Poster section ───────────────────────────────────────────────────────────
+.poster {
+  // ── FALLBACK (shown when Grid is NOT supported) ──────────────────────────
+  // Visible by default; hidden inside @supports block below.
+  &__fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background-color: vars.$color-primary;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgb(0 0 0 / 4%) 40px,
+        rgb(0 0 0 / 4%) 41px
+      );
+  }
+
+  &__fallback-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    max-width: 560px;
+    border: 2px solid vars.$color-accent;
+    padding: 3rem 2.5rem;
+  }
+
+  &__fallback-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  // ── GRID (shown when Grid IS supported) ──────────────────────────────────
+  // Grid is hidden by default; @supports enables it and hides the fallback.
+  &__grid {
+    display: none;
+  }
+
+  // ── @supports: activate grid layout ─────────────────────────────────────
+  @supports (display: grid) {
+    // Hide the fallback
+    &__fallback {
+      display: none;
+    }
+
+    // Activate and define the grid
+    &__grid {
+      display: grid;
+      grid-template:
+        "stripe title   edition" auto
+        "stripe image   sidebar" 1fr
+        "stripe datebar datebar" auto
+        / 14px 1.4fr 1fr;
+      min-height: 90dvh;
+      background-color: vars.$color-dark;
+    }
+  }
+
+  // ── Stripe (decorative accent column) ────────────────────────────────────
+  &__stripe {
+    grid-area: stripe;
+    background-color: vars.$color-accent;
+  }
+
+  // ── Grid areas ────────────────────────────────────────────────────────────
+  &__area {
+    // Title block
+    &--title {
+      grid-area: title;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem 2.5rem 1.5rem;
+      border-bottom: 1px solid mix.shade(vars.$color-accent, 30%);
+    }
+
+    // Edition badge
+    &--edition {
+      grid-area: edition;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding: 3rem 2.5rem 1.5rem 1rem;
+      border-left: 1px solid mix.shade(vars.$color-accent, 30%);
+      border-bottom: 1px solid mix.shade(vars.$color-accent, 30%);
+      gap: 0.25rem;
+    }
+
+    // Hero image
+    &--image {
+      grid-area: image;
+      overflow: hidden;
+    }
+
+    // Sidebar: subtitle + CTA
+    &--sidebar {
+      grid-area: sidebar;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 2.5rem 2rem 1.5rem;
+      border-left: 1px solid mix.shade(vars.$color-accent, 30%);
+      gap: 1.5rem;
+    }
+
+    // Date bar
+    &--datebar {
+      grid-area: datebar;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.9rem 2.5rem;
+      background-color: vars.$color-accent;
+    }
+  }
+
+  // ── Hero image ────────────────────────────────────────────────────────────
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  // ── Text elements ─────────────────────────────────────────────────────────
+
+  // "Jornadas de"
+  &__eyebrow {
+    display: block;
+    font-family: vars.$font-family-serif;
+    font-style: italic;
+    font-size: mix.fluid-size(1.1, 1.5);
+    color: mix.tint(vars.$color-accent, 40%);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.15em;
+  }
+
+  // Main title "Artesanía"
+  &__title {
+    font-family: vars.$font-family-serif;
+    font-size: mix.fluid-size(3.5, 7);
+    font-weight: 900;
+    color: vars.$color-accent;
+    line-height: 0.95;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  // Year "2026"
+  &__year {
+    display: block;
+    font-family: vars.$font-family-sans-serif;
+    font-size: mix.fluid-size(0.85, 1);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: mix.shade(vars.$color-accent, 20%);
+    margin-top: 0.75rem;
+  }
+
+  // "IV Edición"
+  &__edition-label {
+    font-family: vars.$font-family-sans-serif;
+    font-size: mix.fluid-size(0.7, 0.85);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: vars.$color-accent;
+  }
+
+  // "Almería"
+  &__edition-sub {
+    font-family: vars.$font-family-serif;
+    font-style: italic;
+    font-size: mix.fluid-size(1.1, 1.5);
+    color: mix.tint(vars.$color-dark, 55%);
+  }
+
+  // Subtitle in sidebar
+  &__subtitle {
+    font-size: mix.fluid-size(0.85, 1);
+    color: mix.tint(vars.$color-dark, 60%);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  // CTA links (grid version + fallback version)
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.25rem;
+    font-family: vars.$font-family-sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid vars.$color-accent;
+    background-color: vars.$color-accent;
+    color: vars.$color-dark;
+    border-radius: vars.$border-radius;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background-color: mix.shade(vars.$color-accent, 15%);
+      border-color: mix.shade(vars.$color-accent, 15%);
+      color: vars.$color-dark;
+    }
+
+    &--outline {
+      background-color: transparent;
+      color: vars.$color-accent;
+
+      &:hover,
+      &:focus {
+        background-color: mix.tint(vars.$color-accent, 10%);
+        color: vars.$color-dark;
+      }
+    }
+
+    &:focus-visible {
+      @include mix.focus-ring(vars.$color-accent);
+    }
+  }
+
+  // Fallback-only text
+  &__edition,
+  &__date {
+    font-size: 1rem;
+    color: mix.tint(vars.$color-accent, 50%);
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+
+  &__edition {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+  }
+
+  // Datebar pieces
+  &__datebar-date,
+  &__datebar-place {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: vars.$font-family-sans-serif;
+    font-size: mix.fluid-size(0.8, 0.95);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: vars.$color-dark;
+  }
+
+  &__datebar-sep {
+    color: mix.shade(vars.$color-accent, 35%);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  // ── Responsive: collapse to single-column below md ──────────────────────
+  @media (max-width: #{vars.$mq-md}) {
+    @supports (display: grid) {
+      &__grid {
+        grid-template:
+          "title"   auto
+          "image"   auto
+          "sidebar" auto
+          "datebar" auto
+          / 1fr;
+        min-height: auto;
+      }
+
+      &__stripe {
+        display: none;
+      }
+    }
+
+    &__area {
+      &--title {
+        padding: 2rem 1.5rem 1.25rem;
+        border-bottom: 1px solid mix.shade(vars.$color-accent, 30%);
+      }
+
+      &--edition {
+        display: none; // Hidden on mobile — info is in datebar
+      }
+
+      &--image {
+        aspect-ratio: 16 / 9;
+      }
+
+      &--sidebar {
+        padding: 1.75rem 1.5rem;
+        border-left: none;
+        border-top: 1px solid mix.shade(vars.$color-accent, 30%);
+      }
+
+      &--datebar {
+        padding: 0.9rem 1.5rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+      }
+    }
+
+    &__title {
+      font-size: 3.5rem;
+    }
+
+    &__links {
+      flex-flow: row wrap;
+    }
+  }
 }

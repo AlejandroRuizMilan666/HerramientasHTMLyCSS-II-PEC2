@@ -1,12 +1,42 @@
 @use "sass:color";
 
+// ─── Typography ──────────────────────────────────────────────────────────────
 $font-family-sans-serif:
-  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font-family-serif: "Georgia", "Times New Roman", serif;
+  "Inter", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto",
+  "Helvetica Neue", "Arial", sans-serif;
+$font-family-serif: "Playfair Display", "Georgia", "Times New Roman", serif;
 
+// ─── Brand palette ───────────────────────────────────────────────────────────
+$color-primary: #5c3d1e; // warm brown
+$color-secondary: #7a5c2e; // medium tan (darkened for WCAG AA contrast)
+$color-accent: #c8a96e; // golden clay
+$color-light: #f5ede0; // cream background
+$color-dark: #2b1a0e; // deep espresso
+
+// ─── Bootstrap variable overrides (must be set before Bootstrap import) ──────
+$primary: $color-primary;
+$secondary: $color-secondary;
+$body-bg: $color-light;
+$body-color: $color-dark;
+$font-family-base: $font-family-sans-serif;
+$headings-font-family: $font-family-serif;
+$border-radius: 0.25rem;
+$border-radius-lg: 0.5rem;
+$spacer: 1rem;
+$navbar-light-color: $color-dark;
+$navbar-light-active-color: $color-primary;
+$card-border-color: color.scale($color-accent, $lightness: 30%);
+$card-cap-bg: color.scale($color-light, $lightness: -5%);
+$badge-font-size: 0.75em;
+
+// ─── Legacy / UOC vars kept for reference ────────────────────────────────────
 $uoc-corporate: #000078;
 $uoc-masterbrand: #73edff;
 $uoc-bg: color.scale($uoc-masterbrand, $lightness: 70%);
 
-$mqMinWidth: 420px;
+// ─── Breakpoints ─────────────────────────────────────────────────────────────
+$mq-sm: 576px;
+$mq-md: 768px;
+$mq-lg: 992px;
+$mq-xl: 1200px;
+$mq-min-width: 420px;

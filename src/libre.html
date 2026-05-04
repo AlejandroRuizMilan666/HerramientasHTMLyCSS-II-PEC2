@@ -1,0 +1,803 @@
+﻿<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./assets/styles/main.scss" />
+    <link rel="icon" type="image/png" href="./assets/images/logo.png" />
+    <!-- do not remove this line! -->
+    <title>Programa de Talleres — Jornadas de Artesanía 2026</title>
+  </head>
+  <body class="libre-page">
+    <include src="./views/header.html"></include>
+
+    <main>
+      <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PAGE HERO â•â• -->
+      <section class="agenda-hero" aria-labelledby="agenda-title">
+        <div class="container">
+          <p class="agenda-hero__overline">
+            <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+            12–15 Junio 2026
+          </p>
+          <h1 class="agenda-hero__title" id="agenda-title">
+            Programa de Talleres
+          </h1>
+          <p class="agenda-hero__lead">
+            Más de 20 talleres y actividades distribuidos en cuatro jornadas.
+            Filtra por categoría y encuentra las sesiones que más te interesan.
+          </p>
+        </div>
+      </section>
+
+      <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• FILTERS â•â• -->
+      <section class="agenda-filters" aria-label="Filtrar talleres">
+        <div class="container">
+          <div
+            class="agenda-filters__inner"
+            style="container-type: inline-size; container-name: filters-wrap"
+          >
+            <p class="agenda-filters__label">
+              <i class="fa-solid fa-filter" aria-hidden="true"></i>
+              Filtrar por categoría:
+            </p>
+            <div
+              class="agenda-filters__buttons"
+              role="group"
+              aria-label="Categorías de talleres"
+            >
+              <button
+                class="btn agenda-filters__btn agenda-filters__btn--active"
+                data-filter="all"
+                aria-pressed="true"
+              >
+                Todos
+              </button>
+              <button
+                class="btn agenda-filters__btn"
+                data-filter="ceramica"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-circle" aria-hidden="true"></i> Cerámica
+              </button>
+              <button
+                class="btn agenda-filters__btn"
+                data-filter="textil"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-circle" aria-hidden="true"></i> Textil
+              </button>
+              <button
+                class="btn agenda-filters__btn"
+                data-filter="madera"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-circle" aria-hidden="true"></i> Madera
+              </button>
+              <button
+                class="btn agenda-filters__btn"
+                data-filter="joyeria"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-circle" aria-hidden="true"></i> Joyería
+              </button>
+              <button
+                class="btn agenda-filters__btn"
+                data-filter="vidrio"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-circle" aria-hidden="true"></i> Vidrio
+              </button>
+              <button
+                class="btn agenda-filters__btn"
+                data-filter="papel"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-circle" aria-hidden="true"></i> Papel
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• WORKSHOP LIST â•â• -->
+      <section
+        class="agenda-list"
+        aria-labelledby="agenda-list-title"
+        style="container-type: inline-size; container-name: agenda-wrap"
+      >
+        <div class="container">
+          <p class="agenda-list__count" aria-live="polite" id="agenda-count">
+            Mostrando <strong id="agenda-visible-count">8</strong> talleres
+          </p>
+
+          <div class="agenda-list__controls">
+            <button
+              type="button"
+              class="btn btn-sm agenda-list__expand-all"
+              id="expandAll"
+            >
+              <i class="fa-solid fa-angles-down" aria-hidden="true"></i>
+              Expandir todo
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm agenda-list__collapse-all"
+              id="collapseAll"
+            >
+              <i class="fa-solid fa-angles-up" aria-hidden="true"></i> Colapsar
+              todo
+            </button>
+          </div>
+
+          <h2 class="visually-hidden" id="agenda-list-title">
+            Lista de talleres
+          </h2>
+
+          <div class="accordion" id="agendaAccordion">
+            <!-- â”€â”€ Taller 1 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="ceramica"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller01"
+                  aria-expanded="true"
+                  aria-controls="taller01"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--ceramica"
+                      >Cerámica</span
+                    >
+                    <span class="workshop-item__title"
+                      >Iniciación al torno de cerámica</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 3 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 12
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller01" class="accordion-collapse collapse show">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Descubre la magia del torno de alfarero en una sesión
+                        práctica guiada por la ceramista María Casals.
+                        Aprenderás a centrar la arcilla, abrir un cilindro y dar
+                        forma a tu primera pieza. No se requiere experiencia
+                        previa.
+                      </p>
+                      <p>
+                        <strong>Materiales incluidos:</strong> arcilla,
+                        herramientas básicas de torno. Posibilidad de llevarse
+                        la pieza cocida (recogida una semana después del
+                        taller).
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Jueves, 12 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          10:00 - 13:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Aula Taller A
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          María Casals
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 2 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="textil"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller02"
+                  aria-expanded="false"
+                  aria-controls="taller02"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--textil"
+                      >Textil</span
+                    >
+                    <span class="workshop-item__title"
+                      >Tejido con telar de marco</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 4 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 8
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller02" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Aprende a crear una pequeña pieza textil con un telar de
+                        marco tradicional usando fibras naturales y tintes
+                        vegetales. Laura Vives te guiará desde el montado del
+                        urdimbre hasta el acabado del tejido.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Viernes, 13 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          10:00 – 14:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Sala Textil B
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          Laura Vives
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 3 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="madera"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller03"
+                  aria-expanded="false"
+                  aria-controls="taller03"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--madera"
+                      >Madera</span
+                    >
+                    <span class="workshop-item__title"
+                      >Talla en madera para principiantes</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 3 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 10
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller03" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Taller introductorio de talla en madera con gubia y
+                        formón. Aprenderás las técnicas básicas de desbaste y
+                        acabado para crear una pequeña figura o relieve.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Sábado, 14 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          09:30 – 12:30 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Taller Madera C
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          Jordi Puigdomènech
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 4 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="joyeria"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller04"
+                  aria-expanded="false"
+                  aria-controls="taller04"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--joyeria"
+                      >Joyería</span
+                    >
+                    <span class="workshop-item__title"
+                      >Anillos y pendientes en plata</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 5 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 6
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller04" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Crea tu propia joya en plata de ley bajo la tutela de
+                        Antoni Ferrer. Se trabajará la técnica del laminado,
+                        soldadura y acabado en plata. Cada participante se lleva
+                        su pieza.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Sábado, 14 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          10:00 – 15:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Aula Orfebrería D
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          Antoni Ferrer
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 5 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="vidrio"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller05"
+                  aria-expanded="false"
+                  aria-controls="taller05"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--vidrio"
+                      >Vidrio</span
+                    >
+                    <span class="workshop-item__title"
+                      >Introducción al vitral emplomado</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 4 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 8
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller05" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Aprende a cortar vidrio de colores y ensamblarlo con
+                        plomo para crear un pequeño panel de vitral. Núria Soler
+                        te enseñará las técnicas básicas del arte vidriero.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Domingo, 15 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          09:00 – 13:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Taller Vidrio E
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          Núria Soler
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 6 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article class="accordion-item workshop-item" data-category="papel">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller06"
+                  aria-expanded="false"
+                  aria-controls="taller06"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--papel"
+                      >Papel</span
+                    >
+                    <span class="workshop-item__title"
+                      >Encuadernación artesanal</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 3 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 10
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller06" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Crea tu propio cuaderno artesanal usando técnicas de
+                        encuadernación tradicionales de la mano del maestro Pere
+                        Mestre. Aprenderás a coser los cuadernillos y a forrar
+                        la tapa con papel marmolado.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Domingo, 15 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          16:00 – 19:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Sala Papel F
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          Pere Mestre
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 7 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="ceramica"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller07"
+                  aria-expanded="false"
+                  aria-controls="taller07"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--ceramica"
+                      >Cerámica</span
+                    >
+                    <span class="workshop-item__title"
+                      >Esmaltes y pintura sobre cerámica</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 2 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 15
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller07" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Taller de decoración cerámica: aprende a esmaltar y
+                        pintar una pieza biscocho. Exploraremos diferentes
+                        técnicas como el majólica, el sgraffito y los óxidos
+                        colorantes.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Viernes, 13 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          16:00 – 18:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Aula Taller A
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          María Casals
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- â”€â”€ Taller 8 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+            <article
+              class="accordion-item workshop-item"
+              data-category="textil"
+            >
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#taller08"
+                  aria-expanded="false"
+                  aria-controls="taller08"
+                >
+                  <span class="workshop-item__header">
+                    <span
+                      class="badge workshop-item__cat workshop-item__cat--textil"
+                      >Textil</span
+                    >
+                    <span class="workshop-item__title"
+                      >Tintes naturales con plantas</span
+                    >
+                    <span class="workshop-item__meta">
+                      <i class="fa-regular fa-clock" aria-hidden="true"></i> 3 h
+                      &nbsp;&bull;&nbsp;
+                      <i class="fa-solid fa-users" aria-hidden="true"></i> 12
+                      plazas
+                    </span>
+                  </span>
+                </button>
+              </h3>
+              <div id="taller08" class="accordion-collapse collapse">
+                <div class="accordion-body workshop-item__body">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <p>
+                        Descubre el arte de teñir fibras naturales con plantas y
+                        extractos botánicos. Cada participante se lleva a casa
+                        una muestra teñida con cúrcuma, índigo y cebolla.
+                      </p>
+                    </div>
+                    <div class="col-md-4">
+                      <ul class="workshop-item__details">
+                        <li>
+                          <i
+                            class="fa-solid fa-calendar-day"
+                            aria-hidden="true"
+                          ></i>
+                          Domingo, 15 de junio
+                        </li>
+                        <li>
+                          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                          11:00 – 14:00 h
+                        </li>
+                        <li>
+                          <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                          ></i>
+                          Sala Textil B
+                        </li>
+                        <li>
+                          <i class="fa-solid fa-user" aria-hidden="true"></i>
+                          Laura Vives
+                        </li>
+                      </ul>
+                      <a href="#" class="btn btn-sm workshop-item__register">
+                        <i
+                          class="fa-solid fa-pen-to-square"
+                          aria-hidden="true"
+                        ></i>
+                        Inscribirse
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <!-- /#agendaAccordion -->
+
+          <p class="agenda-list__empty" hidden id="agenda-empty">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            No hay talleres en esta categoría. Prueba con otra.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <include src="./views/footer.html"></include>
+    <script type="module" src="./assets/scripts/main.js"></script>
+    <!-- do not remove this line! -->
+  </body>
+</html>

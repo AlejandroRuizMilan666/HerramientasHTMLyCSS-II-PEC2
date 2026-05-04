@@ -1,0 +1,360 @@
+﻿@use "../variables" as vars;
+@use "../mixins" as mix;
+
+// â”€â”€â”€ New CSS custom properties using oklch() colors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+.libre-page {
+  // oklch(lightness chroma hue) — hue values require deg unit
+  --cat-ceramica: oklch(38% 0.12 50deg);
+  --cat-textil: oklch(33% 0.14 280deg);
+  --cat-madera: oklch(28% 0.1 80deg);
+  --cat-joyeria: oklch(38% 0.1 220deg);
+  --cat-vidrio: oklch(38% 0.12 170deg);
+  --cat-papel: oklch(33% 0.1 30deg);
+
+  // color-mix() for hover states — use #fff instead of named color
+  --cat-ceramica-hover: color-mix(in oklch, var(--cat-ceramica) 80%, #fff);
+  --cat-textil-hover: color-mix(in oklch, var(--cat-textil) 80%, #fff);
+  --cat-madera-hover: color-mix(in oklch, var(--cat-madera) 80%, #fff);
+  --cat-joyeria-hover: color-mix(in oklch, var(--cat-joyeria) 80%, #fff);
+  --cat-vidrio-hover: color-mix(in oklch, var(--cat-vidrio) 80%, #fff);
+  --cat-papel-hover: color-mix(in oklch, var(--cat-papel) 80%, #fff);
+}
+
+// â”€â”€â”€ Agenda hero â€” uses dvh / svh â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+.agenda-hero {
+  // dvh: dynamic viewport height (accounts for mobile browser chrome)
+  min-height: 35dvh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    vars.$color-dark 0%,
+    mix.shade(vars.$color-primary, 40%) 100%
+  );
+  padding: 3rem 0;
+
+  &__overline {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: vars.$color-accent;
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-family: vars.$font-family-serif;
+    font-weight: 900;
+    color: vars.$color-light;
+    margin-bottom: 1rem;
+
+    // cqi: container query inline size unit (1% of container inline size)
+    font-size: clamp(2rem, 5cqi + 1rem, 3.5rem);
+  }
+
+  &__lead {
+    max-width: 600px;
+    font-size: 1.05rem;
+    color: mix.tint(vars.$color-light, 20%);
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+// â”€â”€â”€ Filters bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+.agenda-filters {
+  padding: 1.5rem 0;
+  background-color: mix.tint(vars.$color-accent, 85%);
+  border-bottom: 1px solid mix.tint(vars.$color-accent, 60%);
+
+  &__inner {
+    container-type: inline-size;
+    container-name: filters-wrap;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: vars.$color-primary;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__btn {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4em 1em;
+    border: 2px solid vars.$color-primary;
+    background-color: transparent;
+    color: vars.$color-primary;
+    border-radius: 2em;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: vars.$color-primary;
+      color: vars.$color-light;
+      transform: translateY(-1px);
+    }
+
+    &--active {
+      background-color: vars.$color-primary;
+      color: vars.$color-light;
+    }
+
+    &[data-filter="ceramica"] {
+      &.agenda-filters__btn--active,
+      &:hover {
+        background-color: var(--cat-ceramica);
+        border-color: var(--cat-ceramica);
+        color: #fff;
+      }
+    }
+
+    &[data-filter="textil"] {
+      &.agenda-filters__btn--active,
+      &:hover {
+        background-color: var(--cat-textil);
+        border-color: var(--cat-textil);
+        color: #fff;
+      }
+    }
+
+    &[data-filter="madera"] {
+      &.agenda-filters__btn--active,
+      &:hover {
+        background-color: var(--cat-madera);
+        border-color: var(--cat-madera);
+        color: #fff;
+      }
+    }
+
+    &[data-filter="joyeria"] {
+      &.agenda-filters__btn--active,
+      &:hover {
+        background-color: var(--cat-joyeria);
+        border-color: var(--cat-joyeria);
+        color: #fff;
+      }
+    }
+
+    &[data-filter="vidrio"] {
+      &.agenda-filters__btn--active,
+      &:hover {
+        background-color: var(--cat-vidrio);
+        border-color: var(--cat-vidrio);
+        color: #fff;
+      }
+    }
+
+    &[data-filter="papel"] {
+      &.agenda-filters__btn--active,
+      &:hover {
+        background-color: var(--cat-papel);
+        border-color: var(--cat-papel);
+        color: #fff;
+      }
+    }
+
+    @container filters-wrap (max-width: 400px) {
+      font-size: 0.7rem;
+      padding: 0.3em 0.7em;
+    }
+  }
+}
+
+// â”€â”€â”€ Agenda list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+.agenda-list {
+  padding: 2.5rem 0 4rem;
+
+  &__count {
+    font-size: 0.875rem;
+    color: vars.$color-secondary;
+    margin-bottom: 1rem;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__expand-all,
+  &__collapse-all {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35em 1em;
+    border: 2px solid vars.$color-primary;
+    background-color: transparent;
+    color: vars.$color-primary;
+    border-radius: 2em;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: vars.$color-primary;
+      color: vars.$color-light;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 3rem;
+    color: vars.$color-secondary;
+    font-style: italic;
+  }
+}
+
+// â”€â”€â”€ Workshop item (accordion item) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+.workshop-item {
+  margin-bottom: 0.5rem;
+  border: 1px solid mix.tint(vars.$color-accent, 50%);
+  border-radius: vars.$border-radius-lg;
+  overflow: hidden;
+
+  &.is-hidden {
+    display: none;
+  }
+
+  .accordion-button {
+    background-color: #fff;
+    color: vars.$color-dark;
+    padding: 1rem 1.25rem;
+
+    &:not(.collapsed) {
+      background-color: mix.tint(vars.$color-light, 30%);
+      box-shadow: none;
+    }
+
+    &::after {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%235c3d1e'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    flex: 1;
+    margin-right: 1rem;
+  }
+
+  &__title {
+    font-family: vars.$font-family-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: vars.$color-primary;
+    flex: 1;
+  }
+
+  &__meta {
+    font-size: 0.8rem;
+    color: vars.$color-secondary;
+    white-space: nowrap;
+  }
+
+  &__body {
+    background-color: #fff;
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: vars.$color-dark;
+    }
+  }
+
+  &__details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: vars.$color-dark;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      .fa-solid,
+      .fa-regular {
+        color: vars.$color-accent;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__register {
+    background-color: vars.$color-primary;
+    color: vars.$color-light;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      background-color: vars.$color-accent;
+      color: vars.$color-dark;
+    }
+  }
+
+  // Category badge colors using oklch custom properties
+  &__cat {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #fff;
+
+    &--ceramica {
+      background-color: var(--cat-ceramica);
+    }
+
+    &--textil {
+      background-color: var(--cat-textil);
+    }
+
+    &--madera {
+      background-color: var(--cat-madera);
+    }
+
+    &--joyeria {
+      background-color: var(--cat-joyeria);
+    }
+
+    &--vidrio {
+      background-color: var(--cat-vidrio);
+    }
+
+    &--papel {
+      background-color: var(--cat-papel);
+    }
+  }
+}
+
+// â”€â”€â”€ Container query for agenda list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+@container agenda-wrap (max-width: 600px) {
+  .workshop-item__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .workshop-item__meta {
+    font-size: 0.75rem;
+  }
+}

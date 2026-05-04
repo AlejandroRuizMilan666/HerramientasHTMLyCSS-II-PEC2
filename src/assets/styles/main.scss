@@ -4,17 +4,27 @@
  */
 
 /**
- * Import dependencies
+ * Import dependencies (Bootstrap + FontAwesome)
  */
 @use "dependencies";
 
 /**
- * Import layouts
- * It's a best practice to use a different partial for each page
+ * Import shared utilities
  */
-
-@use "layouts/home";
+@use "mixins";
 
 /**
- * Do NOT include anything else in this file!
+ * Import shared components
  */
+@use "components/header";
+@use "components/footer";
+@use "components/cards";
+
+/**
+ * Import page layouts
+ */
+@use "layouts/home";
+@use "layouts/ponentes";
+@use "layouts/articulo";
+@use "layouts/libre";
+

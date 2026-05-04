@@ -1,0 +1,274 @@
+﻿@use "../variables" as vars;
+@use "../mixins" as mix;
+
+// â”€â”€â”€ Cascade layers declaration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+@layer bootstrap, base, components, utilities;
+
+@layer base {
+  // â”€â”€ Article hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-hero {
+    background-color: vars.$color-dark;
+
+    &__container {
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    &__category {
+      background-color: vars.$color-accent;
+      color: vars.$color-dark;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.35em 0.75em;
+    }
+
+    &__date {
+      font-size: 0.85rem;
+      color: mix.tint(vars.$color-secondary, 40%);
+    }
+
+    &__title {
+      font-family: vars.$font-family-serif;
+      font-size: mix.fluid-size(1.5, 2.75);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    &__lead {
+      font-size: 1.1rem;
+      color: mix.tint(vars.$color-light, 20%);
+      line-height: 1.7;
+      max-width: 720px;
+      margin-bottom: 1.25rem;
+    }
+
+    &__byline {
+      font-size: 0.85rem;
+      color: mix.shade(vars.$color-light, 30%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+  }
+}
+
+@layer components {
+  // â”€â”€ Article layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-layout {
+    padding: 3rem 0;
+
+    &__inner {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+  }
+
+  // â”€â”€ Article aside â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-aside {
+    flex: 0 0 280px;
+    position: sticky;
+    top: 80px;
+
+    &__info {
+      background-color: mix.tint(vars.$color-accent, 75%);
+      border-radius: vars.$border-radius-lg;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    &__info-title {
+      font-family: vars.$font-family-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: vars.$color-primary;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.6;
+
+      li {
+        padding: 0.35rem 0;
+        border-bottom: 1px solid mix.tint(vars.$color-accent, 50%);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // â”€â”€ Blockquote â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-quote {
+    background-color: vars.$color-dark;
+    border-left: 4px solid vars.$color-accent;
+    border-radius: 0 vars.$border-radius-lg vars.$border-radius-lg 0;
+    padding: 1.5rem;
+    margin: 0;
+
+    &__text {
+      font-family: vars.$font-family-serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: vars.$color-light;
+      line-height: 1.65;
+      margin: 0 0 0.75rem;
+
+      &::before {
+        content: "\201C";
+        font-size: 2em;
+        line-height: 0;
+        vertical-align: -0.4em;
+        color: vars.$color-accent;
+        margin-right: 0.1em;
+      }
+    }
+
+    &__footer {
+      font-size: 0.8rem;
+      color: mix.tint(vars.$color-secondary, 40%);
+      font-style: normal;
+    }
+  }
+
+  // â”€â”€ Article body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-body {
+    flex: 1;
+    min-width: 0;
+
+    // :is() for consistent heading styles
+    :is(h1, h2, h3, h4) {
+      font-family: vars.$font-family-serif;
+      font-weight: 700;
+      color: vars.$color-primary;
+    }
+
+    &__intro {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: vars.$color-dark;
+      margin-bottom: 1.5rem;
+    }
+
+    &__heading {
+      font-size: 1.4rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      line-height: 1.75;
+      color: vars.$color-dark;
+      margin-bottom: 1.25rem;
+    }
+
+    // adjacent sibling combinator — highlight paragraphs that follow a figure
+    figure + p {
+      font-style: italic;
+      color: mix.shade(vars.$color-dark, 20%);
+    }
+
+    // :where() â€” neutralise specificity for link styles inside article
+    :where(a) {
+      color: vars.$color-primary;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: vars.$color-secondary;
+      }
+    }
+  }
+
+  // :has() â€” article layout changes when article-body contains a blockquote
+  .article-layout__inner:has(.article-quote) {
+    .article-body {
+      &__intro {
+        padding-left: 1rem;
+        border-left: 3px solid mix.tint(vars.$color-accent, 40%);
+      }
+    }
+  }
+
+  // â”€â”€ Article figure â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-figure {
+    margin: 2rem 0;
+
+    &__image {
+      width: 100%;
+      height: auto;
+      border-radius: vars.$border-radius;
+      display: block;
+    }
+
+    &__caption {
+      font-size: 0.8rem;
+      color: vars.$color-secondary;
+      margin-top: 0.5rem;
+      padding-left: 0.75rem;
+      border-left: 3px solid vars.$color-accent;
+    }
+  }
+
+  // â”€â”€ Related content list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  .article-related {
+    background-color: mix.tint(vars.$color-accent, 75%);
+    border-radius: vars.$border-radius-lg;
+    padding: 1.5rem 2rem;
+    margin-top: 2.5rem;
+
+    &__title {
+      font-family: vars.$font-family-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: vars.$color-primary;
+      margin-bottom: 1rem;
+    }
+
+    &__list {
+      padding-left: 1.25rem;
+      margin: 0;
+
+      li {
+        line-height: 1.65;
+        margin-bottom: 0.5rem;
+        color: vars.$color-dark;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  // Container query for article layout
+  @container article-wrap (max-width: 700px) {
+    .article-layout__inner {
+      flex-direction: column;
+    }
+
+    .article-aside {
+      position: static;
+      flex: 0 0 auto;
+      width: 100%;
+    }
+  }
+}

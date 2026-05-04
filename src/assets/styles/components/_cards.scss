@@ -1,0 +1,98 @@
+@use "../variables" as vars;
+@use "../mixins" as mix;
+
+.speaker-card {
+  container-type: inline-size;
+  container-name: speaker;
+
+  @include mix.card-hover-lift;
+
+  &__image-wrap {
+    overflow: hidden;
+    border-radius: vars.$border-radius vars.$border-radius 0 0;
+    aspect-ratio: 1 / 1;
+    background-color: mix.tint(vars.$color-accent, 60%);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__body {
+    padding: 1.25rem;
+  }
+
+  &__name {
+    font-family: vars.$font-family-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: vars.$color-primary;
+    margin-bottom: 0.25rem;
+  }
+
+  &__role {
+    font-size: 0.8rem;
+    color: vars.$color-secondary;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  &__bio {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: vars.$color-dark;
+  }
+
+  &__badge {
+    margin-top: 0.75rem;
+
+    .badge {
+      background-color: vars.$color-primary;
+      color: vars.$color-light;
+    }
+  }
+
+  @container speaker (max-width: 280px) {
+    &__bio {
+      display: none;
+    }
+  }
+}
+
+.workshop-card {
+  container-type: inline-size;
+  container-name: workshop;
+  border-left: 4px solid vars.$color-accent;
+
+  @include mix.card-hover-lift;
+
+  &__category {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  &__title {
+    font-family: vars.$font-family-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: vars.$color-primary;
+  }
+
+  &__meta {
+    font-size: 0.8rem;
+    color: vars.$color-secondary;
+  }
+
+  @container workshop (min-width: 400px) {
+    &__title {
+      font-size: 1.125rem;
+    }
+  }
+}

@@ -1,0 +1,105 @@
+@use "../variables" as vars;
+@use "../mixins" as mix;
+
+.site-footer {
+  // --- Light contact info section ---
+  &__info {
+    background-color: mix.tint(vars.$color-light, 50%);
+    border-top: 1px solid vars.$color-accent;
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+
+  &__tagline {
+    font-size: 0.9rem;
+    color: vars.$color-dark;
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  &__contact-link {
+    color: vars.$color-primary;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: vars.$color-secondary;
+    }
+  }
+
+  // --- Dark bottom bar ---
+  &__bar {
+    background-color: vars.$color-dark;
+    border-top: 3px solid vars.$color-accent;
+    padding: 1rem 0;
+  }
+
+  &__bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  // Logo
+  &__brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  &__logo {
+    height: 2.25rem;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: opacity 0.15s ease;
+
+    .site-footer__brand:hover & {
+      opacity: 1;
+    }
+  }
+
+  // Nav links
+  &__nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+
+  &__nav-link {
+    color: mix.tint(vars.$color-light, 20%);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: vars.$color-accent;
+    }
+  }
+
+  // Social icons
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  &__social-link {
+    color: mix.tint(vars.$color-light, 20%);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: color 0.15s ease, transform 0.15s ease;
+
+    &:hover {
+      color: vars.$color-accent;
+      transform: translateY(-2px);
+    }
+  }
+}

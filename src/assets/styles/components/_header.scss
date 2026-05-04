@@ -1,0 +1,153 @@
+@use "../variables" as vars;
+@use "../mixins" as mix;
+
+.site-header {
+  background: linear-gradient(
+    135deg,
+    mix.shade(vars.$color-light, 4%) 0%,
+    vars.$color-light 60%,
+    mix.tint(vars.$color-accent, 80%) 100%
+  );
+  border-bottom: 1px solid mix.tint(vars.$color-accent, 40%);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+
+  .navbar {
+    padding-block: 0.25rem;
+  }
+
+  &__brand {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 0.4rem;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__logo {
+    height: 4rem;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 1px 3px rgb(0 0 0 / 15%));
+    transition: transform 0.25s ease;
+
+    .site-header__brand:hover & {
+      transform: scale(1.04);
+    }
+  }
+
+  // Divider between brand and nav on wide screens
+  .navbar-collapse {
+    @media (min-width: vars.$mq-lg) {
+      border-left: 1px solid mix.tint(vars.$color-accent, 50%);
+      margin-left: 1.5rem;
+      padding-left: 1.5rem;
+    }
+  }
+
+  &__nav-link {
+    position: relative;
+    color: vars.$color-dark;
+    font-family: vars.$font-family-sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 0.55rem 0.9rem;
+    border-radius: vars.$border-radius;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    // Animated underline
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0.2rem;
+      left: 0.9rem;
+      right: 0.9rem;
+      height: 2px;
+      background-color: vars.$color-primary;
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+
+    i {
+      font-size: 0.8em;
+      opacity: 0.75;
+      margin-right: 0.25rem;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover,
+    &:focus {
+      color: vars.$color-primary;
+      background-color: mix.tint(vars.$color-accent, 78%);
+
+      &::after {
+        transform: scaleX(1);
+      }
+
+      i {
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      color: vars.$color-primary;
+      background-color: mix.tint(vars.$color-accent, 65%);
+      font-weight: 700;
+
+      &::after {
+        transform: scaleX(1);
+      }
+
+      i {
+        opacity: 1;
+      }
+    }
+
+    &:focus-visible {
+      @include mix.focus-ring;
+    }
+  }
+
+  // Hamburger toggler styling
+  .navbar-toggler {
+    border-color: mix.tint(vars.$color-accent, 30%);
+    border-radius: vars.$border-radius;
+    padding: 0.4rem 0.6rem;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: mix.tint(vars.$color-accent, 70%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px mix.tint(vars.$color-primary, 60%);
+    }
+  }
+
+  // Mobile collapsed menu
+  @media (max-width: calc(vars.$mq-lg - 1px)) {
+    .navbar-collapse {
+      border-top: 1px solid mix.tint(vars.$color-accent, 50%);
+      padding-block: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    &__nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0.65rem 1rem;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
