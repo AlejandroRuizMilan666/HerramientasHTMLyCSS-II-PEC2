@@ -2,9 +2,7 @@
 @use "sass:color";
 @use "variables" as vars;
 
-// ─── Function: fluid font size between two rem sizes ─────────────────────────
-// Pass unitless rem values and unitless px breakpoints.
-// e.g. fluid-size(2.5, 6) → clamp(2.5rem, intercept + slope*vw, 6rem)
+// Tamaño de fuente fluido entre dos valores rem
 @function fluid-size($min-rem, $max-rem, $min-px: 320, $max-px: 1200) {
   $slope: math.div($max-rem - $min-rem, $max-px - $min-px);
   $intercept: $min-rem - $slope * $min-px;
@@ -12,17 +10,17 @@
   @return clamp(#{$min-rem}rem, #{$intercept}rem + #{$slope * 100}vw, #{$max-rem}rem);
 }
 
-// ─── Function: tint a color (mix with white) ─────────────────────────────────
+
 @function tint($color, $percentage) {
   @return color.mix(#fff, $color, $percentage);
 }
 
-// ─── Function: shade a color (mix with black) ────────────────────────────────
+
 @function shade($color, $percentage) {
   @return color.mix(#000, $color, $percentage);
 }
 
-// ─── Mixin: visually hidden but accessible ───────────────────────────────────
+
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -35,13 +33,13 @@
   border-width: 0;
 }
 
-// ─── Mixin: focus ring ────────────────────────────────────────────────────────
+
 @mixin focus-ring($color: vars.$color-primary) {
   outline: 3px solid $color;
   outline-offset: 2px;
 }
 
-// ─── Mixin: card hover lift ───────────────────────────────────────────────────
+
 @mixin card-hover-lift {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 

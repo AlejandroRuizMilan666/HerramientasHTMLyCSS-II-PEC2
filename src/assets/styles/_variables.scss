@@ -1,19 +1,19 @@
 @use "sass:color";
 
-// ─── Typography ──────────────────────────────────────────────────────────────
+// Tipografía
 $font-family-sans-serif:
   "Inter", -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto",
   "Helvetica Neue", "Arial", sans-serif;
 $font-family-serif: "Playfair Display", "Georgia", "Times New Roman", serif;
 
-// ─── Brand palette ───────────────────────────────────────────────────────────
-$color-primary: #5c3d1e; // warm brown
-$color-secondary: #7a5c2e; // medium tan (darkened for WCAG AA contrast)
-$color-accent: #c8a96e; // golden clay
-$color-light: #f5ede0; // cream background
-$color-dark: #2b1a0e; // deep espresso
+// Paleta
+$color-primary: #5c3d1e;
+$color-secondary: #7a5c2e;
+$color-accent: #c8a96e;
+$color-light: #f5ede0;
+$color-dark: #2b1a0e;
 
-// ─── Bootstrap variable overrides (must be set before Bootstrap import) ──────
+// Overrides Bootstrap
 $primary: $color-primary;
 $secondary: $color-secondary;
 $body-bg: $color-light;
@@ -29,12 +29,12 @@ $card-border-color: color.scale($color-accent, $lightness: 30%);
 $card-cap-bg: color.scale($color-light, $lightness: -5%);
 $badge-font-size: 0.75em;
 
-// ─── Legacy / UOC vars kept for reference ────────────────────────────────────
+// UOC vars
 $uoc-corporate: #000078;
 $uoc-masterbrand: #73edff;
 $uoc-bg: color.scale($uoc-masterbrand, $lightness: 70%);
 
-// ─── Breakpoints ─────────────────────────────────────────────────────────────
+// Breakpoints
 $mq-sm: 576px;
 $mq-md: 768px;
 $mq-lg: 992px;

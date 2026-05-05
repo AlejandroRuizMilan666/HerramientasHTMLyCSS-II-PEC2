@@ -1,28 +1,17 @@
-/**
- * Use this file to import partials.
- * Do not include SCSS code in this file.
- */
+// Punto de entrada — solo importaciones, sin código SCSS directo
 
-/**
- * Import dependencies (Bootstrap + FontAwesome)
- */
+// Dependencias (Bootstrap)
 @use "dependencies";
 
-/**
- * Import shared utilities
- */
+// Utilidades
 @use "mixins";
 
-/**
- * Import shared components
- */
+// Componentes compartidos
 @use "components/header";
 @use "components/footer";
 @use "components/cards";
 
-/**
- * Import page layouts
- */
+// Layouts de página
 @use "layouts/home";
 @use "layouts/ponentes";
 @use "layouts/articulo";

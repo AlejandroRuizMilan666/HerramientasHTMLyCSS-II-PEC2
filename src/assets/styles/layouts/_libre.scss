@@ -1,17 +1,13 @@
-﻿@use "../variables" as vars;
+@use "../variables" as vars;
 @use "../mixins" as mix;
 
-// â”€â”€â”€ New CSS custom properties using oklch() colors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .libre-page {
-  // oklch(lightness chroma hue) — hue values require deg unit
   --cat-ceramica: oklch(38% 0.12 50deg);
   --cat-textil: oklch(33% 0.14 280deg);
   --cat-madera: oklch(28% 0.1 80deg);
   --cat-joyeria: oklch(38% 0.1 220deg);
   --cat-vidrio: oklch(38% 0.12 170deg);
   --cat-papel: oklch(33% 0.1 30deg);
-
-  // color-mix() for hover states — use #fff instead of named color
   --cat-ceramica-hover: color-mix(in oklch, var(--cat-ceramica) 80%, #fff);
   --cat-textil-hover: color-mix(in oklch, var(--cat-textil) 80%, #fff);
   --cat-madera-hover: color-mix(in oklch, var(--cat-madera) 80%, #fff);
@@ -20,9 +16,9 @@
   --cat-papel-hover: color-mix(in oklch, var(--cat-papel) 80%, #fff);
 }
 
-// â”€â”€â”€ Agenda hero â€” uses dvh / svh â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .agenda-hero {
-  // dvh: dynamic viewport height (accounts for mobile browser chrome)
+  container-type: inline-size;
+  container-name: agenda-hero-wrap;
   min-height: 35dvh;
   display: flex;
   align-items: center;
@@ -47,8 +43,6 @@
     font-weight: 900;
     color: vars.$color-light;
     margin-bottom: 1rem;
-
-    // cqi: container query inline size unit (1% of container inline size)
     font-size: clamp(2rem, 5cqi + 1rem, 3.5rem);
   }
 
@@ -61,7 +55,6 @@
   }
 }
 
-// â”€â”€â”€ Filters bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .agenda-filters {
   padding: 1.5rem 0;
   background-color: mix.tint(vars.$color-accent, 85%);
@@ -173,7 +166,6 @@
   }
 }
 
-// â”€â”€â”€ Agenda list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .agenda-list {
   padding: 2.5rem 0 4rem;
 
@@ -215,7 +207,6 @@
   }
 }
 
-// â”€â”€â”€ Workshop item (accordion item) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .workshop-item {
   margin-bottom: 0.5rem;
   border: 1px solid mix.tint(vars.$color-accent, 50%);
@@ -346,7 +337,6 @@
   }
 }
 
-// â”€â”€â”€ Container query for agenda list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @container agenda-wrap (max-width: 600px) {
   .workshop-item__header {
     flex-direction: column;

@@ -1,11 +1,4 @@
-﻿/**
- * Import any npm dependencies in this file.
- * Bootstrap 5 is customized via Sass variable overrides before the import.
- * Using @import (not @use) because Bootstrap's own SCSS still relies on @import.
- */
-
-// ─── Bootstrap variable overrides ─────────────────────────────────────────────
-// Must be set BEFORE importing Bootstrap variables.
+﻿// Bootstrap variable overrides (antes del @import)
 $primary: #5c3d1e;
 $secondary: #a07850;
 $body-bg: #f5ede0;
@@ -19,7 +12,7 @@ $card-border-color: #d9b98a;
 $card-cap-bg: #f0e6d5;
 $badge-font-size: 0.75em;
 
-// ─── Bootstrap 5 (wrapped in a layer so our custom layers take priority) ─────
+// Bootstrap 5
 @import '../../../node_modules/bootstrap/scss/functions';
 @import '../../../node_modules/bootstrap/scss/variables';
 @import '../../../node_modules/bootstrap/scss/variables-dark';

@@ -1,7 +1,6 @@
 @use "../variables" as vars;
 @use "../mixins" as mix;
 
-// ─── Page shell ──────────────────────────────────────────────────────────────
 *,
 *::before,
 *::after {
@@ -29,14 +28,11 @@ img {
   height: auto;
 }
 
-// ─── Poster wrapper ───────────────────────────────────────────────────────────
 .poster-wrapper {
-  // Container query context kept for future use
   container-type: inline-size;
   container-name: poster-wrap;
 }
 
-// ─── Poster section ───────────────────────────────────────────────────────────
 .poster {
   // ── FALLBACK (shown when Grid is NOT supported) ──────────────────────────
   // Visible by default; hidden inside @supports block below.
@@ -76,20 +72,16 @@ img {
     margin-top: 0.5rem;
   }
 
-  // ── GRID (shown when Grid IS supported) ──────────────────────────────────
-  // Grid is hidden by default; @supports enables it and hides the fallback.
+  // Grid
   &__grid {
     display: none;
   }
 
-  // ── @supports: activate grid layout ─────────────────────────────────────
   @supports (display: grid) {
-    // Hide the fallback
     &__fallback {
       display: none;
     }
 
-    // Activate and define the grid
     &__grid {
       display: grid;
       grid-template:
@@ -102,15 +94,12 @@ img {
     }
   }
 
-  // ── Stripe (decorative accent column) ────────────────────────────────────
   &__stripe {
     grid-area: stripe;
     background-color: vars.$color-accent;
   }
 
-  // ── Grid areas ────────────────────────────────────────────────────────────
   &__area {
-    // Title block
     &--title {
       grid-area: title;
       display: flex;
@@ -120,7 +109,6 @@ img {
       border-bottom: 1px solid mix.shade(vars.$color-accent, 30%);
     }
 
-    // Edition badge
     &--edition {
       grid-area: edition;
       display: flex;
@@ -133,13 +121,11 @@ img {
       gap: 0.25rem;
     }
 
-    // Hero image
     &--image {
       grid-area: image;
       overflow: hidden;
     }
 
-    // Sidebar: subtitle + CTA
     &--sidebar {
       grid-area: sidebar;
       display: flex;
@@ -150,7 +136,6 @@ img {
       gap: 1.5rem;
     }
 
-    // Date bar
     &--datebar {
       grid-area: datebar;
       display: flex;
@@ -161,7 +146,6 @@ img {
     }
   }
 
-  // ── Hero image ────────────────────────────────────────────────────────────
   &__hero-image {
     width: 100%;
     height: 100%;
@@ -170,9 +154,7 @@ img {
     object-position: center;
   }
 
-  // ── Text elements ─────────────────────────────────────────────────────────
 
-  // "Jornadas de"
   &__eyebrow {
     display: block;
     font-family: vars.$font-family-serif;
@@ -183,7 +165,6 @@ img {
     margin-bottom: 0.15em;
   }
 
-  // Main title "Artesanía"
   &__title {
     font-family: vars.$font-family-serif;
     font-size: mix.fluid-size(3.5, 7);
@@ -195,7 +176,6 @@ img {
     letter-spacing: -0.02em;
   }
 
-  // Year "2026"
   &__year {
     display: block;
     font-family: vars.$font-family-sans-serif;
@@ -207,7 +187,6 @@ img {
     margin-top: 0.75rem;
   }
 
-  // "IV Edición"
   &__edition-label {
     font-family: vars.$font-family-sans-serif;
     font-size: mix.fluid-size(0.7, 0.85);
@@ -217,7 +196,6 @@ img {
     color: vars.$color-accent;
   }
 
-  // "Almería"
   &__edition-sub {
     font-family: vars.$font-family-serif;
     font-style: italic;
@@ -225,7 +203,6 @@ img {
     color: mix.tint(vars.$color-dark, 55%);
   }
 
-  // Subtitle in sidebar
   &__subtitle {
     font-size: mix.fluid-size(0.85, 1);
     color: mix.tint(vars.$color-dark, 60%);
@@ -233,7 +210,6 @@ img {
     margin: 0;
   }
 
-  // CTA links (grid version + fallback version)
   &__links {
     display: flex;
     flex-direction: column;
@@ -280,7 +256,6 @@ img {
     }
   }
 
-  // Fallback-only text
   &__edition,
   &__date {
     font-size: 1rem;
@@ -296,7 +271,6 @@ img {
     letter-spacing: 0.2em;
   }
 
-  // Datebar pieces
   &__datebar-date,
   &__datebar-place {
     display: inline-flex;
@@ -316,57 +290,55 @@ img {
     line-height: 1;
   }
 
-  // ── Responsive: collapse to single-column below md ──────────────────────
-  @media (max-width: #{vars.$mq-md}) {
-    @supports (display: grid) {
-      &__grid {
-        grid-template:
-          "title"   auto
-          "image"   auto
-          "sidebar" auto
-          "datebar" auto
-          / 1fr;
-        min-height: auto;
-      }
+}
 
-      &__stripe {
-        display: none;
-      }
+@container poster-wrap (max-width: 600px) {
+  @supports (display: grid) {
+    .poster__grid {
+      grid-template:
+        "title"   auto
+        "image"   auto
+        "sidebar" auto
+        "datebar" auto
+        / 1fr;
+      min-height: auto;
     }
 
-    &__area {
-      &--title {
-        padding: 2rem 1.5rem 1.25rem;
-        border-bottom: 1px solid mix.shade(vars.$color-accent, 30%);
-      }
-
-      &--edition {
-        display: none; // Hidden on mobile — info is in datebar
-      }
-
-      &--image {
-        aspect-ratio: 16 / 9;
-      }
-
-      &--sidebar {
-        padding: 1.75rem 1.5rem;
-        border-left: none;
-        border-top: 1px solid mix.shade(vars.$color-accent, 30%);
-      }
-
-      &--datebar {
-        padding: 0.9rem 1.5rem;
-        flex-wrap: wrap;
-        gap: 0.5rem 1rem;
-      }
+    .poster__stripe {
+      display: none;
     }
+  }
 
-    &__title {
-      font-size: 3.5rem;
-    }
+  .poster__area--title {
+    padding: 2rem 1.5rem 1.25rem;
+    border-bottom: 1px solid mix.shade(vars.$color-accent, 30%);
+  }
 
-    &__links {
-      flex-flow: row wrap;
-    }
+  .poster__area--edition {
+    display: none;
+  }
+
+  .poster__area--image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .poster__area--sidebar {
+    padding: 1.75rem 1.5rem;
+    border-left: none;
+    border-top: 1px solid mix.shade(vars.$color-accent, 30%);
+  }
+
+  .poster__area--datebar {
+    padding: 0.9rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  .poster__title {
+    font-size: 3.5rem;
+  }
+
+  .poster__links {
+    flex-flow: row wrap;
   }
 }

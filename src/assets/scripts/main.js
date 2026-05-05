@@ -1,11 +1,5 @@
-/**
- * Import dependencies from node_modules
- */
 import { Collapse } from "bootstrap";
 
-/**
- * Expand / collapse all accordion items — used in libre.html
- */
 (function initAccordionControls() {
   const expandBtn = document.getElementById("expandAll");
   const collapseBtn = document.getElementById("collapseAll");
@@ -26,9 +20,6 @@ import { Collapse } from "bootstrap";
   });
 })();
 
-/**
- * Workshop filter logic — used in libre.html (agenda page)
- */
 (function initWorkshopFilters() {
   const filterButtons = document.querySelectorAll(".agenda-filters__btn");
   if (!filterButtons.length) return;
@@ -37,10 +28,6 @@ import { Collapse } from "bootstrap";
   const visibleCount = document.getElementById("agenda-visible-count");
   const emptyMsg = document.getElementById("agenda-empty");
 
-  /**
-   * Filter workshops by category.
-   * @param {string} category - The category slug or "all".
-   */
   function filterWorkshops(category) {
     let count = 0;
 
