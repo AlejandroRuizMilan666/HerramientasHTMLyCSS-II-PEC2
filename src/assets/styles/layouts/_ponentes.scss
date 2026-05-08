@@ -59,7 +59,6 @@
     container-type: inline-size;
     container-name: speakers-section;
 
-    // Flexbox grid (no Bootstrap .row / .col-*)
     &__grid {
       display: flex;
       flex-wrap: wrap;
@@ -74,7 +73,6 @@
       container-name: speaker-item;
     }
 
-    // Responsive flex breakpoints
     @media (max-width: vars.$mq-lg) {
       &__item {
         flex: 0 1 calc(50% - 0.75rem);
@@ -90,14 +88,12 @@
 }
 
 @layer utilities {
-  // Container query on the speakers section
   @container speakers-section (max-width: 500px) {
     .speakers__item {
       flex: 1 1 100%;
     }
   }
 
-  // Visually hidden utility
   .visually-hidden {
     position: absolute;
     width: 1px;

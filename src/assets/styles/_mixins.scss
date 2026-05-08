@@ -2,7 +2,6 @@
 @use "sass:color";
 @use "variables" as vars;
 
-// Tamaño de fuente fluido entre dos valores rem
 @function fluid-size($min-rem, $max-rem, $min-px: 320, $max-px: 1200) {
   $slope: math.div($max-rem - $min-rem, $max-px - $min-px);
   $intercept: $min-rem - $slope * $min-px;
@@ -10,16 +9,13 @@
   @return clamp(#{$min-rem}rem, #{$intercept}rem + #{$slope * 100}vw, #{$max-rem}rem);
 }
 
-
 @function tint($color, $percentage) {
   @return color.mix(#fff, $color, $percentage);
 }
 
-
 @function shade($color, $percentage) {
   @return color.mix(#000, $color, $percentage);
 }
-
 
 @mixin visually-hidden {
   position: absolute;
@@ -33,12 +29,10 @@
   border-width: 0;
 }
 
-
 @mixin focus-ring($color: vars.$color-primary) {
   outline: 3px solid $color;
   outline-offset: 2px;
 }
-
 
 @mixin card-hover-lift {
   transition: transform 0.2s ease, box-shadow 0.2s ease;

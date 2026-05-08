@@ -2,7 +2,7 @@
 @use "../mixins" as mix;
 
 .site-footer {
-  // --- Light contact info section ---
+
   &__info {
     background-color: mix.tint(vars.$color-light, 50%);
     border-top: 1px solid vars.$color-accent;
@@ -28,7 +28,6 @@
     }
   }
 
-  // --- Dark bottom bar ---
   &__bar {
     background-color: vars.$color-dark;
     border-top: 3px solid vars.$color-accent;
@@ -43,7 +42,6 @@
     gap: 0.75rem;
   }
 
-  // Logo
   &__brand {
     display: flex;
     align-items: center;
@@ -64,7 +62,6 @@
     }
   }
 
-  // Nav links
   &__nav {
     display: flex;
     align-items: center;
@@ -83,7 +80,6 @@
     }
   }
 
-  // Social icons
   &__social {
     display: flex;
     align-items: center;

@@ -34,8 +34,7 @@ img {
 }
 
 .poster {
-  // ── FALLBACK (shown when Grid is NOT supported) ──────────────────────────
-  // Visible by default; hidden inside @supports block below.
+
   &__fallback {
     display: flex;
     align-items: center;
@@ -72,7 +71,6 @@ img {
     margin-top: 0.5rem;
   }
 
-  // Grid
   &__grid {
     display: none;
   }
@@ -153,7 +151,6 @@ img {
     object-fit: cover;
     object-position: center;
   }
-
 
   &__eyebrow {
     display: block;
@@ -342,3 +339,27 @@ img {
     flex-flow: row wrap;
   }
 }
+
+  @container poster-wrap (min-width: 601px) and (max-width: 900px) {
+    @supports (display: grid) {
+      .poster__grid {
+        grid-template:
+          "stripe title   edition" auto
+          "stripe image   image"   auto
+          "stripe sidebar sidebar" auto
+          "stripe datebar datebar" auto
+          / 14px 1fr 1fr;
+        min-height: auto;
+      }
+    }
+
+    .poster__area--image {
+      aspect-ratio: 16 / 9;
+    }
+
+    .poster__area--sidebar {
+      border-left: none;
+      border-top: 1px solid mix.shade(vars.$color-accent, 30%);
+      padding: 1.75rem 2.5rem;
+    }
+  }

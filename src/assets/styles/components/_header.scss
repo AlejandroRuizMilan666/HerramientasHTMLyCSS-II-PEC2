@@ -40,7 +40,6 @@
     }
   }
 
-  // Divider between brand and nav on wide screens
   .navbar-collapse {
     @media (min-width: vars.$mq-lg) {
       border-left: 1px solid mix.tint(vars.$color-accent, 50%);
@@ -61,7 +60,6 @@
     border-radius: vars.$border-radius;
     transition: color 0.2s ease, background-color 0.2s ease;
 
-    // Animated underline
     &::after {
       content: "";
       position: absolute;
@@ -116,7 +114,6 @@
     }
   }
 
-  // Hamburger toggler styling
   .navbar-toggler {
     border-color: mix.tint(vars.$color-accent, 30%);
     border-radius: vars.$border-radius;
@@ -132,7 +129,6 @@
     }
   }
 
-  // Mobile collapsed menu
   @media (max-width: calc(vars.$mq-lg - 1px)) {
     .navbar-collapse {
       border-top: 1px solid mix.tint(vars.$color-accent, 50%);

@@ -1,17 +1,17 @@
-// Punto de entrada — solo importaciones, sin código SCSS directo
 
-// Dependencias (Bootstrap)
+
+
 @use "dependencies";
 
-// Utilidades
+
 @use "mixins";
 
-// Componentes compartidos
+
 @use "components/header";
 @use "components/footer";
 @use "components/cards";
 
-// Layouts de página
+
 @use "layouts/home";
 @use "layouts/ponentes";
 @use "layouts/articulo";

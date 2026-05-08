@@ -148,7 +148,6 @@
     flex: 1;
     min-width: 0;
 
-    // :is() for consistent heading styles
     :is(h1, h2, h3, h4) {
       font-family: vars.$font-family-serif;
       font-weight: 700;
@@ -174,13 +173,11 @@
       margin-bottom: 1.25rem;
     }
 
-    // adjacent sibling combinator — highlight paragraphs that follow a figure
     figure + p {
       font-style: italic;
       color: mix.shade(vars.$color-dark, 20%);
     }
 
-    // :where() â€” neutralise specificity for link styles inside article
     :where(a) {
       color: vars.$color-primary;
       text-decoration: underline;
@@ -193,7 +190,6 @@
     }
   }
 
-  // :has() â€” article layout changes when article-body contains a blockquote
   .article-layout__inner:has(.article-quote) {
     .article-body {
       &__intro {
@@ -250,7 +246,7 @@
 }
 
 @layer utilities {
-  // Container query for article layout
+
   @container article-wrap (max-width: 700px) {
     .article-layout__inner {
       flex-direction: column;
